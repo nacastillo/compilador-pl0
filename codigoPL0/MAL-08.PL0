@@ -1,0 +1,49 @@
+CONST N = 20;
+
+VAR A, B, C;
+
+PROCEDURE TRIANGULO;
+VAR A, B;
+BEGIN
+  WRITELN;
+  A := 15;
+  WHILE A > 0 DO
+    BEGIN
+      B := 0;
+      WHILE B < A DO
+        BEGIN
+          WRITE ('*');
+          B := B + 1
+        END;
+      WRITELN;
+      A := A - 1;
+    END
+END;
+
+BEGIN
+  writeln ('***************************************************');
+  writeln ('ARTE ASCII EN PL/0.');
+  writeln ('DOS SECUENCIAS ENTERAS Y UN TRIANGULO RECTANGULO...');
+  writeln ('ANONIMO (S. XX)');
+  writeln ('***************************************************');
+
+  A := TRIANGULO;
+  WHILE A <= N DO
+    BEGIN
+      WRITE (A, ' ');
+      A := A + 1
+    END;
+
+  CALL TRIANGULO;
+
+  B := -N;
+  C := 0;
+  WHILE B < C DO
+    BEGIN
+      WRITE (B, ' ');
+      B := B + 1
+    END;
+  WRITELN;
+  writeln
+
+END.

@@ -1,0 +1,59 @@
+var X, Y, Q, R;
+
+procedure DIVIDIR;
+var V, W;
+begin
+  Q := 0;
+  R := X; if R < 0 then R := -R;
+  W := Y; if W < 0 then W := -W;
+  V := Y; if V < 0 then V:= -V;
+  while W <= R do W := W * 2;
+  while W > V do
+    begin
+      Q := Q * 2; W := W / 2;
+      if W <= R then
+        begin
+          R := R - W; Q := Q + 1
+        end
+    end;
+  if X < 0 then R:= -R;
+  if X < 0 then Q:= -Q;
+  if Y < 0 then Q:= -Q;
+end;
+
+procedure OTRO;
+  procedure DIVIDIR;
+  begin
+    Q := X / Y; R := X - Y * Q
+  end;
+call DIVIDIR;
+
+procedure SALIDA;
+begin
+  write ('  Cociente: ', Q); writeln;
+  write ('  Resto: '); writeln (R);
+end;
+
+begin
+  writeln ('************************************************************');
+  writeln ('Se ingresan dos valores, se muestra su cociente.');
+  writeln ('Se utilizan dos metodos:');
+  writeln ('Metodo 1: el algoritmo "desplazar y restar" (shift-subtract)');
+  writeln ('Metodo 2: el operador / (division entera) provisto por PL/0.');
+  writeln ('Cada CALL DIVIDIR se refiere a un procedimiento distinto.');
+  writeln ('************************************************************');
+
+  write ('Dividendo: '); readln (X);
+  write ('Divisor: '); readln (Y);
+  writeln;
+  if Y <> 0 then
+    begin
+      write ('Metodo 1'); writeln;
+      call DIVIDIR;
+      call SALIDA; writeln;
+      write ('Metodo 2'); writeln;
+      call OTRO;
+      call SALIDA;
+    end;
+  writeln
+end.

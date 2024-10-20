@@ -1,0 +1,29 @@
+var K;
+procedure P;
+  procedure coma;
+  begin
+    write (',');
+    K := K + 1;
+    call P
+  end;
+begin
+  if K < 10 then
+    begin
+      write (K);
+      call K;
+    end
+end;
+
+begin
+  writeln ('***********************************************************');
+  writeln ('Se muestran los numeros del 1 al 10, separados por comas.');
+  writeln ('El procedimiento P llama al procedimiento coma y viceversa.');
+  writeln ('El problema de la inexistencia de "forward declarations"');
+  writeln ('se soluciona mediante el anidamiento de los procedimientos.');
+  writeln ('***********************************************************');
+
+  K := 1;
+  call P;
+  writeln (10);
+  writeln
+end.

@@ -1,0 +1,148 @@
+var IMPORTE, BILLETE, VUELTO, USDOLARES, CENTAVOS, VUELTOUSDOLARES, VUELTOCENTAVOS,
+    IMPORTEOK, CENTAVOSOK, USDOLARESOK, BILLETEOK, VUELTOOK;
+
+procedure ERROR;
+begin
+  writeln ('VALOR FUERA DE RANGO!')
+end;
+
+begin
+  WRITELN ('*************************************);
+  writeLn ('   VUELTO PARA IMPORTES EN DOLARES   ');
+  writeLn ('PAGADOS CON UN BILLETE EN EL FREESHOP');
+  WRITELN ('*************************************');
+  IMPORTEOK := -1;
+  while IMPORTEOK <> 0 do
+    begin
+      writeln ('IMPORTE (min US$ 0.01 y max US$ 100.00)');
+      CENTAVOSOK := -1;
+      while CENTAVOSOK <> 0 do
+        begin
+          write ('CENTAVOS DE US$: '); readLn (CENTAVOS);
+          CENTAVOSOK := 0;
+          if CENTAVOS < 0 then CENTAVOSOK := -1;
+          if CENTAVOS > 99 then CENTAVOSOK := -1;
+          if CENTAVOSOK <> 0 then call ERROR
+        end;
+      USDOLARESOK := -1;
+      while USDOLARESOK <> 0 do
+        begin
+          write ('DOLARES: '); readLn (USDOLARES);
+          USDOLARESOK := 0;
+          if USDOLARES < 0 then USDOLARESOK := -1;
+          if USDOLARES > 100 then USDOLARESOK := -1;
+          if USDOLARESOK <> 0 then call ERROR
+       end;
+      write ('IMPORTE: US$ ', USDOLARES, '.');
+      if CENTAVOS < 10 then write ('0');
+      writeLn (CENTAVOS);
+      IMPORTE := USDOLARES * 100 + CENTAVOS;
+      IMPORTEOK := 0;
+      if IMPORTE < 1 then IMPORTEOK := -1;
+      if IMPORTE > 10000 then IMPORTEOK := -1;
+      if IMPORTEOK <> 0 then call ERROR
+    end;
+
+  VUELTOOK := -1;
+  while VUELTOOK <> 0 do
+    begin
+      BILLETEOK := -1;
+      while BILLETEOK <> 0 do
+        begin
+          write ('BILLETE (min US$ 1 y max US$ 100): US$ '); readLn (BILLETE);
+          BILLETEOK := -1;
+          if BILLETE = 1 then BILLETEOK := 0;
+          if BILLETE = 2 then BILLETEOK := 0;
+          if BILLETE = 5 then BILLETEOK := 0;
+          if BILLETE = 10 then BILLETEOK := 0;
+          if BILLETE = 20 then BILLETEOK := 0;
+          if BILLETE = 50 then BILLETEOK := 0;
+          if BILLETE = 100 then BILLETEOK := 0;
+          if BILLETEOK <> 0 then writeln ('BILLETE INEXISTENTE!')
+        end;
+      VUELTO := BILLETE * 100 - IMPORTE;
+      VUELTOOK := 0;
+      if VUELTO < 0 then
+        begin
+          VUELTOOK := -1;
+          writeLn ('BILLETE INSUFICIENTE PARA EL PAGO!')
+        end
+    end;
+
+  VUELTOUSDOLARES := VUELTO / 100;
+  VUELTOCENTAVOS := VUELTO - VUELTOUSDOLARES * 100;
+
+  write ('Su vuelto: US$ ', VUELTOUSDOLARES, '.');
+  if VUELTOCENTAVOS < 10 then write ('0');
+  writeLn (VUELTOCENTAVOS);
+
+  writeLn;
+
+  if VUELTO >= 5000 then
+    begin
+      writeLn ('1 billete de US$ 50');
+      VUELTO := VUELTO - 5000
+    end;
+
+  if VUELTO >= 2000 then
+    begin
+      if VUELTO / 2000 = 1 then writeLn ('1 billete de US$ 20');
+      if VUELTO / 2000 <> 1 then writeLn ('2 billetes de US$ 20');
+      VUELTO := VUELTO - VUELTO / 2000 * 2000
+    end;
+
+  if VUELTO >= 1000 then
+    begin
+      writeLn ('1 billete de US$ 10');
+      VUELTO := VUELTO - 1000
+    end;
+
+  if VUELTO >= 500 then
+    begin
+      writeLn ('1 billete de US$ 5');
+      VUELTO := VUELTO - 500
+    end;
+
+  if VUELTO >= 200 then
+    begin
+      if VUELTO / 200 = 1 then writeLn ('1 billete de US$ 2');
+      if VUELTO / 200 <> 1 then writeLn ('2 billetes de US$ 2');
+      VUELTO := VUELTO - VUELTO / 200 * 200
+    end;
+
+  if VUELTO >= 100 then
+    begin
+      writeLn ('1 billete de US$ 1');
+      VUELTO := VUELTO - 100
+    end;
+
+  if VUELTO >= 50 then
+    begin
+      writeLn ('1 moneda de 50 centavos de US$');
+      VUELTO := VUELTO - 50
+    end;
+
+  if VUELTO >= 25 then
+    begin
+      writeLn ('1 moneda de 25 centavos de US$');
+      VUELTO := VUELTO - 25
+    end;
+
+  if VUELTO >= 10 then
+    begin
+      if VUELTO / 10 = 1 then writeLn ('1 moneda de 10 centavos de US$');
+      if VUELTO / 10 <> 1 then writeLn ('2 monedas de 10 centavos de US$');
+      VUELTO := VUELTO - VUELTO / 10 * 10
+    end;
+
+  if VUELTO >= 5 then
+    begin
+      writeLn ('1 moneda de 5 centavos de US$');
+      VUELTO := VUELTO - 5
+    end;
+
+  if VUELTO > 1 then writeLn (VUELTO, ' monedas de 1 centavo de US$');
+  if VUELTO = 1 then writeLn ('1 moneda de 1 centavo de US$');
+
+  writeln
+end.

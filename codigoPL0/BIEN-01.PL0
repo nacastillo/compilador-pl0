@@ -1,0 +1,24 @@
+VAR BASE, EXPO, RESU;
+
+PROCEDURE POT;
+IF EXPO > 0 THEN
+   BEGIN
+        RESU := RESU * BASE;
+        EXPO := EXPO - 1;
+        CALL POT
+   END;
+
+BEGIN
+  writeln ('*****************************************************');
+  writeln ('Se ingresan base y exponente, se muestra la potencia.');
+  writeln ('Ejemplo de funcion recursiva');
+  writeln ('*****************************************************');
+
+     WRITE ('BASE: '); READLN(BASE);
+     WRITE ('EXPONENTE: '); READLN(EXPO);
+     RESU := 1;
+     CALL POT;
+     IF EXPO < 0 THEN RESU := 0;
+     WRITELN ('RESULTADO: ', RESU);
+	 writeln
+END.
